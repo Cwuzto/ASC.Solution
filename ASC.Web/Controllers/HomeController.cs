@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ASC.Web.Models;
 using Microsoft.Extensions.Options;
 using ASC.Web.Configuration;
+using Azure.Identity;
 
 namespace ASC.Web.Controllers;
 
@@ -33,5 +34,10 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public IActionResult Dashboard()
+    {
+        return View();
     }
 }
