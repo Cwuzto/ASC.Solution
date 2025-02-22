@@ -82,4 +82,10 @@ header.secureLayout, main.secureLayout, footer.secureLayout{
     }
 }
 
-.side-nav li.active
+.side-nav li.active {
+    background-color: #f5f5f5;
+}
+
+.margin-bottom-0px {
+    margin-bottom: 0px;
+}
