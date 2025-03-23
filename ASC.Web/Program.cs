@@ -6,13 +6,9 @@ using ASC.Web.Services;
 using DataAccess.Interfaces;
 using DataAccess;
 using Microsoft.Extensions.Options;
+using ASC.Web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
-
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services
     .AddCongfig(builder.Configuration)
@@ -93,6 +89,12 @@ using (var scope = app.Services.CreateScope())
         scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>(),
         scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>(),
         scope.ServiceProvider.GetRequiredService<IOptions<ApplicationSettings>>());
+}
+//CreateNavigationCache
+using (var scope = app.Services.CreateScope())
+{
+    var navigationCacheOperations = scope.ServiceProvider.GetRequiredService<INavigationCacheOperations>();
+    await navigationCacheOperations.CreateNavigationCacheAsync();
 }
 
 app.Run();
