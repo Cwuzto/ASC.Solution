@@ -11,7 +11,7 @@ using ASC.Web.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddCongfig(builder.Configuration)
+    .AddConfig(builder.Configuration)
     .AddMydependencyGroup();
 
 //// Add services to the container.
