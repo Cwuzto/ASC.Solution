@@ -10,7 +10,7 @@ namespace ASC.Web.Services
     public static class DependencyInjection
     {
         //Configure Services
-        public static IServiceCollection AddCongfig(this IServiceCollection services, IConfiguration config)        {
+        public static IServiceCollection AddConfig(this IServiceCollection services, IConfiguration config)        {
             //Add AddDbContext with connection string to mirage database
             var connectionstring = config.GetConnectionString("DefaultConnection")??
                 throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");

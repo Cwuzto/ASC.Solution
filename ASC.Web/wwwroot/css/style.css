@@ -8,77 +8,78 @@
 
 nav ul a,
 nav .brand-logo {
-  color: #444;
+    color: #444;
 }
 
 p {
-  line-height: 2rem;
+    line-height: 2rem;
 }
 
 .sidenav-trigger {
-  color: #26a69a;
+    color: #26a69a;
 }
 
 .parallax-container {
-  min-height: 380px;
-  line-height: 0;
-  height: auto;
-  color: rgba(255,255,255,.9);
+    min-height: 380px;
+    line-height: 0;
+    height: auto;
+    color: rgba(255,255,255,.9);
 }
-  .parallax-container .section {
-    width: 100%;
-  }
+
+    .parallax-container .section {
+        width: 100%;
+    }
 
 @media only screen and (max-width : 992px) {
-  .parallax-container .section {
-    position: absolute;
-    top: 40%;
-  }
-  #index-banner .section {
-    top: 10%;
-  }
+    .parallax-container .section {
+        position: absolute;
+        top: 40%;
+    }
+
+    #index-banner .section {
+        top: 10%;
+    }
 }
 
 @media only screen and (max-width : 600px) {
-  #index-banner .section {
-    top: 0;
-  }
+    #index-banner .section {
+        top: 0;
+    }
 }
 
 .icon-block {
-  padding: 0 15px;
+    padding: 0 15px;
 }
-.icon-block .material-icons {
-  font-size: inherit;
-}
+
+    .icon-block .material-icons {
+        font-size: inherit;
+    }
 
 footer.page-footer {
-  margin: 0;
+    margin: 0;
 }
 
-/*removes padding*/
-.padding-0px{
+.padding-0px {
     padding: 0px !important;
 }
 
-/*make logo fit in the header*/
-.nav-wrapper .brand-logo img{
+.nav-wrapper .brand-logo img {
     height: 64px;
 }
 
-@media (max-width: 600px){
-    .nav-wrapper .brand-logo img{
+@media (max-width: 60px) {
+    .nav-wrapper .brand-logo img {
         height: 56px;
     }
 }
 
-header.secureLayout, main.secureLayout, footer.secureLayout{
+header.secureLayout, main.secureLayout, footer.secureLayout {
     padding-left: 300px;
 }
 
 @media only screen and (max-width: 992px) {
-    header.secureLayout, main.secureLayout, footer.secureLayout{
-        padding-left:0,
+    header.secureLayout, main.secureLayout, footer.secureLayout {
+        padding-left: 0;
     }
 }
 
@@ -90,7 +91,7 @@ header.secureLayout, main.secureLayout, footer.secureLayout{
     margin-bottom: 0px;
 }
 
-input-field .input-validation-error {
+.input-field .input-validation-error {
     border-bottom: 1px solid #FF4081;
     box-shadow: 0 1px 0 0 #FF4081;
 }
@@ -102,4 +103,12 @@ input-field .input-validation-error {
 
 .validation-summary-errors {
     color: #FF4081;
+}
+
+.margin-top-50px {
+    margin-top: 50px;
+}
+
+.margin-bottom-50px {
+    margin-bottom: 50px;
 }
