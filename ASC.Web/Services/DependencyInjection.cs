@@ -19,6 +19,15 @@ namespace ASC.Web.Services
             services.AddOptions();//IOption
             services.Configure<ApplicationSettings>(config.GetSection("Appsettings"));
 
+            //Using a Gmail Authentication Provider for Customer Authentication
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection = config.GetSection("Authentication:Google");
+                    options.ClientId = config["Google:Identity:ClientID"];
+                    options.ClientSecret = config["Google:Identity:ClientSecret"];
+                });
+
             return services;
         }
         //Add service
@@ -31,7 +40,7 @@ namespace ASC.Web.Services
             services.AddIdentity<IdentityUser, IdentityRole>((options) =>
             {
                 options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders().AddDefaultUI();
 
             //Add Services
             services.AddTransient<IEmailSender, AuthMessageSender>();

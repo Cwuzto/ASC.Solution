@@ -51,9 +51,9 @@ p {
     padding: 0 15px;
 }
 
-    .icon-block .material-icons {
-        font-size: inherit;
-    }
+.icon-block .material-icons {
+    font-size: inherit;
+}
 
 footer.page-footer {
     margin: 0;
@@ -111,4 +111,20 @@ header.secureLayout, main.secureLayout, footer.secureLayout {
 
 .margin-bottom-50px {
     margin-bottom: 50px;
+}
+
+.padding-bottom-15px {
+    padding-bottom: 15px !important;
+}
+
+.cursor-hand {
+    cursor: pointer;
+}
+
+.padding-left-20px {
+    padding-left: 20px;
+}
+
+.padding-right-20px {
+    padding-right: 20px;
 }
