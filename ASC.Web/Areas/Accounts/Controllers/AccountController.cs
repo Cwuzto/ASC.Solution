@@ -35,7 +35,7 @@ namespace ASC.Web.Areas.Accounts.Controllers
             var serviceEngineers = await _userManager.GetUsersInRoleAsync(Roles.Engineer.ToString());
             //hold all service engineers in session
             HttpContext.Session.SetSession("ServiceEngineers", serviceEngineers);
-            return View (new ServiceEngineerViewModel
+            return View(new ServiceEngineerViewModel
             {
                 ServiceEngineers = serviceEngineers == null ? null : serviceEngineers.ToList(),
                 Registration = new ServiceEngineerRegistrationViewModel() { IsEdit = false }
@@ -130,9 +130,9 @@ namespace ASC.Web.Areas.Accounts.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Customers(CustomerViewModel customer)
-        { 
+        {
             customer.Customers = HttpContext.Session.GetSession<List<IdentityUser>>("Customers");
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(customer);
             }
@@ -157,6 +157,33 @@ namespace ASC.Web.Areas.Accounts.Controllers
                 await _emailSender.SendEmailAsync(customer.Registration.Email, "Account Deactivated", $"Your account has been deactivated.");
             }
             return RedirectToAction("Customers");
+        }
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            var user = HttpContext.User.GetCurrentUserDetails();
+
+            return View(new ProfileModel() { UserName = user.Name });
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Profile(ProfileModel profile)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            //update username
+            var user = await _userManager.FindByEmailAsync(HttpContext.User.GetCurrentUserDetails().Email);
+            user.UserName = profile.UserName;
+            IdentityResult result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                result.Errors.ToList().ForEach(p => ModelState.AddModelError("", p.Description));
+                return View();
+            }
+            await _signInManager.RefreshSignInAsync(user);
+            return RedirectToAction("Dashboard", "Dashboard", new { Area = "ServiceRequests" });
         }
     }
 }
