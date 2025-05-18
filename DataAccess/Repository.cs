@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Model.BaseTypes;
 using DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DataAccess
 {
@@ -51,6 +52,15 @@ namespace DataAccess
         {
             var result = dbContext.Set<T>().ToListAsync().Result;
             return result as IEnumerable<T>;
+        }
+        public async Task<IEnumerable<T>> FindAllByQuery(Expression<Func<T, bool>> filter)
+        {
+            var result = dbContext.Set<T>().Where(filter).ToListAsync().Result;
+            return result as IEnumerable<T>;
+        }
+        public async Task<IEnumerable<T>> FindAllInAuditByQuery(Expression<Func<T, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
     }
 }
