@@ -74,7 +74,7 @@
                 </div>
                 <div class="divider"></div>
                 <form asp-controller="Account" asp-action="ServiceEngineers" method="post"
-                      class="col s12" id="fromUser">
+                      class="col s12" id="formUser">
                     <input type="hidden" asp-for="Registration.IsEdit" id="Registration_IsEdit" />
                     <input type="hidden" asp-for="Registration.Email" id="Registration_Email" />
                     <div class="input-field col s4">
@@ -128,7 +128,7 @@
 
             // Handle Reset fucntionality
             $(document).on("click", ".reset", function () {
-                $('#fromUser')[0].reset();
+                $('#formUser')[0].reset();
                 $('#Input_Registration_Email').removeAttr('disabled');
                 $('.btnSubmit').text('Create');
                 $('#Registration_IsEdit').val('False');
@@ -148,13 +148,13 @@
                 $('#Input_Registration_Email').attr('disabled', 'disabled');
                 $('#Registration_IsActive').prop('checked', user[1] === 'True' ? true : false);
                 $('.btnSubmit').text('Save');
-                Materialize.updateTextFields();
+                M.updateTextFields();
             });
             // Set hidden Email field to correct value from UI field
             // This is required for
             $(document).on('click', '.btnSubmit', function () {
                 $('#Registration_Email').val($('#Input_Registration_Email').val());
-                Materialize.updateTextFields();
+                M.updateTextFields();
             });
         });
     </script>

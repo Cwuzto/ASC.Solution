@@ -15,5 +15,7 @@ namespace Model.Models
             this.RowKey = Guid.NewGuid().ToString();
             this.PartitionKey = key;
         }
+        public bool IsActive { get; set; }
+        public string Name { get; set; }
     }
 }

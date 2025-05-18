@@ -1,5 +1,7 @@
 ﻿using ASC.Web.Configuration;
 using ASC.Web.Data;
+using Business.Interfaces;
+using Business;
 using DataAccess;
 using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -27,6 +29,12 @@ namespace ASC.Web.Services
                     options.ClientId = config["Google:Identity:ClientID"];
                     options.ClientSecret = config["Google:Identity:ClientSecret"];
                 });
+            //services.AddDistributedMemoryCache();
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = config.GetSection("CacheSettings:CacheConnectionString").Value;
+                options.InstanceName = config.GetSection("CacheSettings:CacheInstance").Value;
+            });
 
             return services;
         }
@@ -55,10 +63,21 @@ namespace ASC.Web.Services
             services.AddDistributedMemoryCache();//
             services.AddSingleton<INavigationCacheOperations, NavigationCacheOperations>();
 
+            //Add MasterDataOperations
+            services.AddScoped<IMasterDataOperations, MasterDataOperations>();
+            services.AddAutoMapper(typeof(ApplicationDbContext));
+
+            //
+            services.AddScoped<IMasterDataCacheOperations, MasterDataCacheOperations>();
+            services.AddScoped<IServiceRequestOperations, ServiceRequestOperations>();
+
             //Add RazorPages , MVC
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
             return services;
         }
     }
